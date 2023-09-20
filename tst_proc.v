@@ -95,6 +95,6 @@ always @(posedge clk) begin
     endcase    
     end
 end
-
+assign data_out = A;
 
 endmodule
