@@ -1,5 +1,3 @@
-
-
 module processor(clk,rst,start,data_in,data_out);
 input clk;
 input rst; //rst will stop processor and make every thing zero m_rst resets memory
