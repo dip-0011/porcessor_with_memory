@@ -15,8 +15,8 @@ reg [7:0]PC;
 reg [3:0]op_c;
 reg state;
 reg [1:0]counter; 
+reg [7:0]temp;
 
-wire [7:0]temp;
 wire [7:0]ALU_result;
 
 parameter WRITE = 1'b0;//start writing to memory when start = 0
@@ -76,7 +76,23 @@ always @(posedge clk) begin
             PC <= data_in;
             counter <= 2'b00;
             temp <= mem[PC];
-            PC <= PC+1;
+            case (counter)
+                2'b00 : begin
+                    op_c <= temp[3:0];
+                    PC <= PC+1'b1;
+                    counter <= counter+1'b1;
+                end
+                2'b01 :begin
+                    A <= temp;
+                    PC <= PC+1'b1;
+                    counter <= counter+1'b1;
+                end
+                2'b10 :begin
+                    B <= temp;
+                    PC <= PC+1;
+                    counter <= 2'b00;
+                end
+            endcase
         end   
     endcase    
     end
